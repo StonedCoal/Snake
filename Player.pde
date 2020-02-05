@@ -3,16 +3,18 @@ public class Player{
   public ArrayList<Integer> fields = new ArrayList<Integer>();
   Grid currentGrid;
   public int direction = 1;
+  int fCounter=0;
   
   public Player(int x, int y, Grid grid){
     currentGrid=grid;
     fields.add(currentGrid.calculateFieldByCoordinates(x, y));
   }
   
-  public void move(){
+  public void move(int steps){
     int currentField = fields.get(fields.size()-1);
     int nextField = -1;
-    switch(direction){
+    for(int i = 0; i<steps; i++){
+     switch(direction){
       case 0:
         nextField = currentField - gridSize;
       break;
@@ -25,21 +27,23 @@ public class Player{
       case 3:
         nextField = currentField -1;
       break;
+      } 
+      currentField = nextField;
     }
     if(nextField < 0 || nextField>=currentGrid.gridData.length){
-      println("Game Over");
+      die();
       return;
     }
     if(nextField%currentGrid.gridSize==0&&direction==1){
-      println("Game Over");
+      die();
       return;
     }
     if(nextField%currentGrid.gridSize==currentGrid.gridSize-1&&direction==3){
-      println("Game Over");
+      die();
       return;
     }
     if(fields.contains(nextField)){
-      println("Game Over");
+      die();
       return;
     }
     if(currentGrid.gridData[nextField]==1){
@@ -51,5 +55,10 @@ public class Player{
       fields.remove(0);
     }
     
+  }
+  
+  public void die(){
+    fCounter++;
+    println("F:" + fCounter);
   }
 }
