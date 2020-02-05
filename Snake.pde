@@ -5,7 +5,6 @@ Grid gameGrid;
 Player player;
 Player player2;
 int timer;
-boolean slow=false;
 boolean jumpDown=false;
 boolean jumpDown2=false;
 
@@ -18,10 +17,9 @@ void setup(){
 }
 
 void update(){
-  int tempSpeed = slow?speed*5:speed;
-  if(timer >= tempSpeed){
-    player.move(1);
-    player2.move(1);
+  if(timer >= speed){
+    player.move(1, player2);
+    player2.move(1, player);
     timer =1;
   }else
   timer++;
@@ -80,23 +78,19 @@ void keyPressed(){
      player2.direction = 2;
    if(key=='a'&&player2.direction!=1) 
      player2.direction = 3;
-   if(key==' ')
-    slow = true;
-   if(keyCode==CONTROL)
+   if(key=='l')
     jumpDown = true;
    if(key=='c')
     jumpDown2 = true;
 }
 
 void keyReleased(){
-  if(key==' ')
-    slow = false;
-  if(keyCode==CONTROL && jumpDown){
+  if(key=='l' && jumpDown){
     jumpDown = false;
-    player.move(4);
+    player.move(4, player2);
   }
     if(key=='c' && jumpDown2){
     jumpDown2 = false;
-    player2.move(4);
+    player2.move(4, player);
   }
 }

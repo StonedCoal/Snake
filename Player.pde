@@ -10,7 +10,7 @@ public class Player{
     fields.add(currentGrid.calculateFieldByCoordinates(x, y));
   }
   
-  public void move(int steps){
+  public void move(int steps, Player enemy){
     int currentField = fields.get(fields.size()-1);
     int nextField = -1;
     for(int i = 0; i<steps; i++){
@@ -43,6 +43,10 @@ public class Player{
       return;
     }
     if(fields.contains(nextField)){
+      die();
+      return;
+    }
+    if(enemy.fields.contains(nextField)){
       die();
       return;
     }
