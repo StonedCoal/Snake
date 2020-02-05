@@ -11,9 +11,10 @@ boolean jumpDown2=false;
 void setup(){
   gameGrid = new Grid(gridSize);
   size(800, 800);
+  surface.setTitle("Schnake");
   gameGrid.addFruit();
-  player = new Player(5, 15, gameGrid);
-  player2 = new Player(5, 15, gameGrid);
+  player = new Player(5, 15, 1, gameGrid);
+  player2 = new Player(75, 65, 3, gameGrid);
 }
 
 void update(){

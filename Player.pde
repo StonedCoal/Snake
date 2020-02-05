@@ -5,8 +5,9 @@ public class Player{
   public int direction = 1;
   int fCounter=0;
   
-  public Player(int x, int y, Grid grid){
+  public Player(int x, int y, int dir ,Grid grid){
     currentGrid=grid;
+    direction = dir;
     fields.add(currentGrid.calculateFieldByCoordinates(x, y));
   }
   
